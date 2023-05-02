@@ -13,7 +13,7 @@ let aviao={
         }
     },
     velocidade: 0,
-    velocidadeMaxima: 1000,
+    velocidadeMaxima: 800,
     acelerar: function(){
         console.log("Velocidade atual :"+this.velocidade)
         if(this.Ligado && this.velocidade<this.velocidadeMaxima){
@@ -40,24 +40,27 @@ let aviao={
     }
 }
 aviao.Ligar();
-for(let x=1; x<=50; x++){
+for(let x=1; x<=20; x++){
     aviao.acelerar();
 }
 console.log("Velocidade atual :"+aviao.velocidade);
 
 aviao.decolar();
 
-for(let x=1; x<=31; x++){
+for(let x=1; x<=30; x++){
+    aviao.acelerar();
+}
+console.log("Velocidade atual :"+aviao.velocidade);
+
+for(let x=1; x<=30; x++){
     aviao.desacelerar();
 }
 console.log("Velocidade atual :"+aviao.velocidade);
 
 aviao.pousar();
-for(let x=1; x<=19; x++){
+for(let x=1; x<=20; x++){
     aviao.desacelerar();
 }
 console.log("Velocidade atual :"+aviao.velocidade);
 
 aviao.desligar();
-
-
