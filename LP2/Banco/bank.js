@@ -54,43 +54,31 @@ class Poupanca extends Conta{
             console.log("Desculpa mas não podemos fazer a correção porque hoje não é o seu aniversário.");
         }
     }
-
-    ativar(){
-        this.ativo=true;
-        console.log("Sua conta poupança foi ativada.")
+}
+class ContaCorrente extends Conta {
+    constructor(numero, cpf, saldo, ativo){ 
+    super(numero, cpf, saldo, ativo);
+    this.numChequesSolicitados = 0;
     }
-
-    debitar(valor){
-        if(this.ativo){
-            if(valor<0){
-                console.log("Impossivel realizar, valor negativo...")
-            }else if(valor==0){
-                console.log("Impossivel realizar, valor zerado...")
-            }else if( valor>this.saldo){
-                console.log("Impossivel realizar, saldo indisponivel...")
-            }else{
-                this.saldo -= valor
-            }
-        }else{
-            console.log("Conta Inativa.")
+    
+    solicitarCheques(){
+        if(this.numChequesSolicitados < 3){
+            this.saldo -= 30.00; // Cada cheque solicitado debita R$30,00
+            this.numChequesSolicitados++;
+            console.log("Seu cheque foi solicitado com sucesso.");
+    
+        } else {
+           console.log("Você atingiu o limite maximo de cheques possiveis.")
         }
-    }
-
-    creditar(valor){
-        if(this.ativo){
-            if(valor<0){
-                console.log("Impossivel realizar, valor negativo...")
-            }else if(valor==0){
-                console.log("Impossivel realizar, valor zerado...")
-            }else{
-                this.saldo += valor
-            }
-        }else{
-            console.log("Conta inativa.")
-        }
+    
     }
 }
-
+class especial extends Conta{
+    constructor(cpf,numero,limite,saldo,ativo){
+        super(numero,cpf,saldo,ativo);
+        this.limite = limite
+    }
+}
 const leia = require("prompt-sync")();
 console.log("Bem vindo ao banco SALTBANK");
 console.log("Dê um salto na sua vida!")
@@ -105,7 +93,7 @@ if(conta==1){
     let aniversario=parseInt(leia("Gostariamos de saber a sua data de aniversario : "));
     let C1= new Poupanca(cpf,aniversario,numero,0,false);
     C1.ativar();
-    for(let x=1; x<=1; x++){
+    for(let x=1; x<=10; x++){
         op = leia("Digite D - debito ou C - credito : ");
         console.log("Saldo atual : "+C1.saldo)
         if(op=="D"){
@@ -127,4 +115,51 @@ if(conta==1){
         console.log("desculpa não entendi o que quis dizer.")
     }
     console.log("Saldo final da conta "+C1.saldo)
+} else if(conta==2){
+    let C1 = new ContaCorrente(cpf,numero,0,false);
+    C1.ativar();
+    for(let x = 1; x <= 10; x++) {
+        console.log("Conta Corrente");
+        console.log("Saldo atual: R$ " + C1.saldo.toFixed(2));
+        op = leia("Movimento - D - débito ou C - crédito: ");
+        valor = parseFloat(leia("Valor do movimento: R$ "));
+        if (op == "D") {
+            C1.debitar(valor);
+        } else if (op == "C") {
+            C1.creditar(valor);
+        }
+        const continuar = leia("\nContinuar? (S/N): ");
+        if (continuar != "S") {
+            const solicitarCheque = leia("Você deseja solicitar um cheque? (S/N): ");
+        if (solicitarCheque == "S") {
+            C1.solicitarCheque();
+        }
+            break;
+        }
+    }
+    console.log("\nSaldo final da conta: R$ " + ContaCorrente.saldo.toFixed(2))
+} else if(conta==3){
+    C1 = new especial(cpf,numero,1000,0,false);
+    C1.ativar();
+    for (let x=1; x<=10; x++) {
+        op = leia("Qual operação você deseja efetuar ? Digite C para Credito e D para Debito ")
+        if (op=="C") {
+            valor = parseInt(leia("Digite o valor para crédito: "))
+            C1.creditar(valor)
+        } else if (op = "D") {
+            valor = parseInt(leia("Digite o valor para débito: "))
+            C1.debitar(valor)
+        }
+        console.log("Saldo atual da conta : "+C1.saldo)
+    }
+    C1.debitar()
+    for(C1.saldo==0;valor<C1.limite;){
+        if (C1.saldo<=0 && valor<=C1.limite){
+                    C1.limite -= valor
+                    console.log("Limite atual ",C1.limite)
+            }
+        else if (C1.saldo<=0 && valor>C1.limite){
+                    console.log("Não foi possível realizar. Fora do limite.")
+                }
+    }
 }
