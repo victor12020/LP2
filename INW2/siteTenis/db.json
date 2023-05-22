@@ -1,0 +1,46 @@
+{
+    "produtos": [
+    {
+    "id": 1,
+    "descricao": "Tenis vermelho",
+    "estoque": 10,
+    "valor": 190,
+    "img":".\assets\1.jpg"
+    },
+    {
+    "id": 2,
+    "descricao": "Tenis vinho",
+    "estoque": 10,
+    "valor": 230,
+    "img":".\assets\2.jpg"
+    },
+    {
+    "id": 3,
+    "descricao": "Tenis azul claro",
+    "estoque": 10,
+    "valor": 190,
+    "img":".\assets\3.jpg"
+    },
+    {
+    "id": 4,
+    "descricao": "Tenis azul escuro",
+    "estoque": 10,        
+    "valor": 150,
+    "img":".\assets\4.jpg"
+    },
+    {
+    "id": 5,
+    "descricao": "Tenis preto",        
+    "estoque": 10,
+    "valor": 140,
+    "img":".\assets\5.jpg"
+    },
+    {
+    "id": 6,
+    "descricao": "Tenis azul escuro",
+    "estoque": 10,
+    "valor": 190,
+    "img":".\assets\6.jpg"
+    }
+]
+}
