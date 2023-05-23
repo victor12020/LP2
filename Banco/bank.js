@@ -41,13 +41,13 @@ class Conta{
 }
 
 class Poupanca extends Conta{
-    constructor(cpf,aniversario,numero,saldo,ativo){
+    constructor(cpf,diaAniversarioPoupanca,numero,saldo,ativo){
         super(cpf,numero,saldo,ativo);
-        this.aniversario=aniversario;
+        this.diaAniversarioPoupanca=diaAniversarioPoupanca;
     }
     
     correcao(data){
-        if(data==this.aniversario){
+        if(data==this.diaAniversarioPoupanca){
             this.saldo=(this.saldo*0.05)+this.saldo
             console.log("Após a correção o saldo ficou : "+this.saldo)
         } else{
@@ -78,55 +78,81 @@ class especial extends Conta{
         super(numero,cpf,saldo,ativo);
         this.limite = limite
     }
+    debito(limite,saldo,valor){
+        for(saldo<=0;valor<=limite;){
+        if (saldo<=0 && valor<=limite){
+                    limite -= valor
+                    console.log("Limite atual ",limite)
+            }
+        else if (saldo<=0 && valor>limite){
+                    console.log("Não foi possível realizar. Fora do limite.")
+                }
+            }
+    }
+    mostrarLimite(){
+    console.log('Limite disponível:', this.limite)
+    }
 }
+// programa principal
 const leia = require("prompt-sync")();
+let opcao=0;
+
+// menu
 console.log("Bem vindo ao banco SALTBANK");
 console.log("Dê um salto na sua vida!")
 let numero = parseInt(leia("Digite o numero da conta : "));
 let cpf = leia("Digite o cpf da conta : ");
 let op="";
 let valor=0;
-console.log("SALTBANK");
-console.log("Dê um salto na sua vida!")
-let conta= parseInt(leia("Escolha qual conta deseja usar:\n 1- Poupança \n 2- Corrente \n 3- Especial \n"));
-if(conta==1){
-    let aniversario=parseInt(leia("Gostariamos de saber a sua data de aniversario : "));
-    let C1= new Poupanca(cpf,aniversario,numero,0,false);
-    C1.ativar();
-    for(let x=1; x<=10; x++){
+do{
+    console.log("")
+    console.log("1- Poupaça")
+    console.log("2- Corrente")
+    console.log("3- Especial")
+    console.log("4- Sair")
+    opcao = leia("Digite o numero da sua opção : ")
+    
+    // Contas
+    if(opcao==1){
+        console.log("Testando conta Poupança")
+        let aniversario=parseInt(leia("Gostariamos de saber a sua data de aniversario : "));
+        let C1p= new Poupanca(cpf,aniversario,numero,0,false);
+        C1p.ativar();
+        for(let x=1; x<=10; x++){
         op = leia("Digite D - debito ou C - credito : ");
-        console.log("Saldo atual : "+C1.saldo)
+        console.log("Saldo atual : "+C1p.saldo)
         if(op=="D"){
             valor = parseInt(leia("Digite o valor para debito : "))
-            C1.debitar(valor)
+            C1p.debitar(valor)
         }else if(op=="C"){
             valor = parseInt(leia("Digite o valor para creditar : "))
-            C1.creditar(valor)
+            C1p.creditar(valor)
         }
-        console.log("Saldo atual da conta : "+C1.saldo)
-    }
-    let correcao= leia("Gostaria de fazer a correção do seu saldo? sim/não \n")
-    if(correcao=="sim"){
+        console.log("Saldo atual da conta : "+C1p.saldo)
+        }   
+        let correcao= leia("Gostaria de fazer a correção do seu saldo? sim/não \n")
+        if(correcao=="sim"){
         let data=leia("Qual a data de hoje? ")
-        C1.correcao(data)
-    } else if(correcao=="não"){
+        C1p.correcao(data)
+        } else if(correcao=="não"){
         console.log("Que pena, deixa pra proxima então.")
-    } else {
+        } else {
         console.log("desculpa não entendi o que quis dizer.")
-    }
-    console.log("Saldo final da conta "+C1.saldo)
-} else if(conta==2){
-    let C1 = new ContaCorrente(cpf,numero,0,false);
-    C1.ativar();
-    for(let x = 1; x <= 10; x++) {
-        console.log("Conta Corrente");
-        console.log("Saldo atual: R$ " + C1.saldo.toFixed(2));
-        op = leia("Movimento - D - débito ou C - crédito: ");
-        valor = parseFloat(leia("Valor do movimento: R$ "));
+        }
+        console.log("Saldo final da conta "+C1p.saldo)
+    }else if(opcao==2){
+        console.log("Testando conta Corrente")
+        let C1c = new ContaCorrente(cpf,numero,0,false);
+        C1c.ativar();
+        for(let x = 1; x <= 10; x++) {
+            console.log("Conta Corrente");
+            console.log("Saldo atual: R$ " + C1c.saldo.toFixed(2));
+            op = leia("Movimento - D - débito ou C - crédito: ");
+            valor = parseFloat(leia("Valor do movimento: R$ "));
         if (op == "D") {
-            C1.debitar(valor);
+            C1c.debitar(valor);
         } else if (op == "C") {
-            C1.creditar(valor);
+            C1c.creditar(valor);
         }
         const continuar = leia("\nContinuar? (S/N): ");
         if (continuar != "S") {
@@ -136,30 +162,14 @@ if(conta==1){
         }
             break;
         }
-    }
-    console.log("\nSaldo final da conta: R$ " + ContaCorrente.saldo.toFixed(2))
-} else if(conta==3){
-    C1 = new especial(cpf,numero,1000,0,false);
-    C1.ativar();
-    for (let x=1; x<=10; x++) {
-        op = leia("Qual operação você deseja efetuar ? Digite C para Credito e D para Debito ")
-        if (op=="C") {
-            valor = parseInt(leia("Digite o valor para crédito: "))
-            C1.creditar(valor)
-        } else if (op = "D") {
-            valor = parseInt(leia("Digite o valor para débito: "))
-            C1.debitar(valor)
         }
-        console.log("Saldo atual da conta : "+C1.saldo)
+        console.log("\nSaldo final da conta: R$ " + ContaCorrente.saldo.toFixed(2))
+    } else if(opcao="3"){
+
+    } else if(opcao="4"){
+        console.log("Saindo do programa .........")
+    } else{
+        console.log("Digitação invalida ........")
     }
-    C1.debitar()
-    for(C1.saldo==0;valor<C1.limite;){
-        if (C1.saldo<=0 && valor<=C1.limite){
-                    C1.limite -= valor
-                    console.log("Limite atual ",C1.limite)
-            }
-        else if (C1.saldo<=0 && valor>C1.limite){
-                    console.log("Não foi possível realizar. Fora do limite.")
-                }
-    }
-}
+}while(opcao != "4")
+console.log("Fim de programa, volte sempre.")
