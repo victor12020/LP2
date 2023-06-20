@@ -3,7 +3,7 @@ const leia= require('prompt-sync')();
 let matricula = ["M1","M2","M3","M4"];
 let alunos = ["Victor","Jorge","Luisa","João"];
 let notas = [0,0,0,0];
-let situação=[];
+let situacao="";
 
 console.log("\nMatricula"+'\t|'+"\tAluno"+'\t|'+"\tNota");
 console.log("------------------------------------------------")
@@ -21,12 +21,12 @@ for(let i=0; i<matricula.length; i++){
 console.log("\nMatricula"+'\t|'+"\tAluno"+'\t|'+"\tNota");
 console.log("------------------------------------------------")
 for(let i=0; i<matricula.length; i++){
-    if(notas[i]>=5){
-        situação='Aprovado';
+    if(notas[i]>5){
+        situacao='Aprovado';
     }else{
-        situação='REC';
+        situacao='REC';
     }
-    console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]+'\t|'+'\t'+situação[i]);
+    console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]+'\t|'+'\t'+situacao);
 }
 console.log("------------------------------------------------"+"\n")
 console.log("Alteração de dados");
@@ -35,7 +35,12 @@ for(let i=0; i<matricula.length; i++){
     if(alt == matricula[i]){
         console.log("Nota do aluno antes de alterar : "+notas[i]);
         notas[i]=leia("Digite a nova nota do Aluno : ");
-        console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]);
+        if(notas[i]>5){
+            situacao='Aprovado';
+        }else{
+            situacao='REC';
+        }
+        console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]+'\t|'+'\t'+situacao);
     }
 }
 
