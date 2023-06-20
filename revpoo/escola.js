@@ -5,20 +5,20 @@ let alunos = ["Victor","Jorge","Luisa","João"];
 let notas = [0,0,0,0];
 let situacao="";
 
-console.log("\nMatricula"+'\t|'+"\tAluno"+'\t|'+"\tNota");
+console.log("\nMatricula"+'\t|\t'+'Aluno'+'\t|\t'+'Nota');
 console.log("------------------------------------------------")
 for(let i=0; i<matricula.length; i++){
-    console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]);
+    console.log(matricula[i]+'\t|\t'+alunos[i]+'\t|\t'+notas[i]);
 }
 console.log("------------------------------------------------")
 console.log("\nDigitação de valores");
 for(let i=0; i<matricula.length; i++){
-    console.log(matricula[i]+'\t|'+'\t'+alunos[i]);
+    console.log(matricula[i]+'\t|\t'+alunos[i]);
     notas[i]=leia("Digite a nota :");
     console.log("\n");
 }
 
-console.log("\nMatricula"+'\t|'+"\tAluno"+'\t|'+"\tNota");
+console.log("\nMatricula"+'\t|\t'+'Aluno'+'\t|\t'+'Nota');
 console.log("------------------------------------------------")
 for(let i=0; i<matricula.length; i++){
     if(notas[i]>5){
@@ -26,7 +26,7 @@ for(let i=0; i<matricula.length; i++){
     }else{
         situacao='REC';
     }
-    console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]+'\t|'+'\t'+situacao);
+    console.log(matricula[i]+'\t|\t'+alunos[i]+'\t|\t'+notas[i]+'\t|\t'+situacao);
 }
 console.log("------------------------------------------------"+"\n")
 console.log("Alteração de dados");
@@ -40,7 +40,7 @@ for(let i=0; i<matricula.length; i++){
         }else{
             situacao='REC';
         }
-        console.log(matricula[i]+'\t|'+'\t'+alunos[i]+'\t|'+'\t'+notas[i]+'\t|'+'\t'+situacao);
+        console.log(matricula[i]+'\t|\t'+alunos[i]+'\t|\t'+notas[i]+'\t|\t'+situacao);
     }
 }
 
