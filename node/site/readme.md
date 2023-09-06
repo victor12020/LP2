@@ -1,0 +1,2 @@
+Executar:
+npm i
