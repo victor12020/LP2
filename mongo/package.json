@@ -2,10 +2,10 @@
   "name": "mongo",
   "version": "1.0.0",
   "description": "",
-  "main": "node.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./node.js localhost 8000"
+    "start": "nodemon ./index.js localhost 8000"
   },
   "author": "Victor",
   "license": "ISC",
