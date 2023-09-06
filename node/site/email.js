@@ -1,4 +1,4 @@
-
+var currentUser; 
 
 function createLogin(){
     var email = document.getElementById('email').value;
@@ -23,6 +23,14 @@ function loginEmail(){
     })
 }
 
+currentUser = firebase.auth().currentUser;
+
 function deletarUsuario(){
-    
+    currentUser = firebase.auth().currentUser;
+    if(currentUser){
+        currentUser.delete().then(()=>{
+            alert('Usuario escluido')
+        })
+    }
 }
+
