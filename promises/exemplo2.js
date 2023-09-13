@@ -40,7 +40,7 @@ getTurma("A").then((alunos) => {
 
 console.log("---------------------------------------");
 
-Promise.all([getTurma("A"), getTurma[B], getTurma["C"]])
+Promise.all([getTurma("A"), getTurma('B'), getTurma("C")])
 
   .then((turmas) => [].concat(...turmas))
 
