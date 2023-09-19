@@ -2,7 +2,7 @@ const http = require('http');
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
-    res.setHeader('Content-Typem','text/plain');
+    res.setHeader('Content-Typem', 'text/plain');
     res.end('Hello World! Node.JS Server')
 });
 
